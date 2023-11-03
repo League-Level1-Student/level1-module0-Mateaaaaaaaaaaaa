@@ -9,6 +9,11 @@ int upperPipeHeight = (int) random(100, 400);
 int pipeGap=160;
 int lowerY = upperPipeHeight + pipeGap;
 int lowerPipeHeight= HEIGHT-(upperPipeHeight+pipeGap);
+int score=0;
+PImage back;
+PImage pipeBottom;
+PImage pipeTop;
+PImage bird;
 
 @Override
   public void settings() {
@@ -17,15 +22,35 @@ int lowerPipeHeight= HEIGHT-(upperPipeHeight+pipeGap);
 
 @Override
   public void setup() {
-}
+
+  back = loadImage("flappyBackground.jpg");
+  pipeBottom = loadImage("bottomPipe.png");
+  pipeTop = loadImage("topPipe.png");
+  bird = loadImage("bird.png");
+  bird.resize(50, 50);
+  back.resize(800,600);
+  pipeBottom.resize(60,lowerPipeHeight );
+  pipeTop.resize(60, upperPipeHeight);
+
+  }
+
+
+
 
 @Override
   public void draw() {
+  background(back);
+  image (pipeBottom, pipeX, lowerY);
+  image (pipeTop, pipeX, 0);
+  image (bird, birdsX, birdsY);
 
-  background(3, 3, 3);
+
   fill(255, 3, 3);
   stroke(255, 3, 3);
-  ellipse(birdsX, birdsY, 50, 50);
+ // ellipse(birdsX, birdsY, 50, 50);
+
+
+  text(score, 50, 50);
 
   birdsY+=birdYVelocity;
 
@@ -34,18 +59,24 @@ int lowerPipeHeight= HEIGHT-(upperPipeHeight+pipeGap);
   pipeX-=5;
 
   fill(3, 255, 3);
-  rect(pipeX, 0, 60, upperPipeHeight);
- 
-    rect(pipeX, lowerY, 60, lowerPipeHeight);
-    
-      teleportPipes();
-      
-   boolean end = intersectsPipes() ;
-   if (end==true){
-     stop();
-   }
-       rect(0, HEIGHT-40, WIDTH, 40);
-    
+//  rect(pipeX, 0, 60, upperPipeHeight);
+
+//  rect(pipeX, lowerY, 60, lowerPipeHeight);
+
+  //ground
+  rect(0, HEIGHT-40, WIDTH, 40);
+
+  teleportPipes();
+
+
+  if (birdsY>HEIGHT-40) {
+    stop();
+  }
+
+  boolean end = intersectsPipes() ;
+  if (end==true) {
+    stop();
+  }
 }
 
 
@@ -63,19 +94,20 @@ public void teleportPipes() {
   if (pipeX==-60) {
     pipeX= 800;
     upperPipeHeight = (int) random(100, 400);
-    
-       lowerY = upperPipeHeight + pipeGap;
-       lowerPipeHeight=HEIGHT-(upperPipeHeight+pipeGap);
-
+    score=score+1;
+    lowerY = upperPipeHeight + pipeGap;
+    lowerPipeHeight=HEIGHT-(upperPipeHeight+pipeGap);
+      pipeBottom.resize(60,lowerPipeHeight );
+  pipeTop.resize(60, upperPipeHeight);
   }
-
-
 }
 
-boolean intersectsPipes() { 
-         if (birdsY-25 < upperPipeHeight && birdsX+25> pipeX && birdsX < (pipeX+60)){
-            return true; }
-        else if (birdsY+25>lowerY && birdsX+25 > pipeX && birdsX < (pipeX+60)) {
-            return true; }
-        else { return false; }
+boolean intersectsPipes() {
+  if (birdsY < upperPipeHeight && birdsX+25> pipeX && birdsX < (pipeX+60)) {
+    return true;
+  } else if (birdsY+25>lowerY && birdsX+25 > pipeX && birdsX < (pipeX+60)) {
+    return true;
+  } else {
+    return false;
+  }
 }
