@@ -28,11 +28,10 @@ PImage bird;
   pipeTop = loadImage("topPipe.png");
   bird = loadImage("bird.png");
   bird.resize(50, 50);
-  back.resize(800,600);
-  pipeBottom.resize(60,lowerPipeHeight );
+  back.resize(800, 600);
+  pipeBottom.resize(60, lowerPipeHeight );
   pipeTop.resize(60, upperPipeHeight);
-
-  }
+}
 
 
 
@@ -47,11 +46,11 @@ PImage bird;
 
   fill(255, 3, 3);
   stroke(255, 3, 3);
- // ellipse(birdsX, birdsY, 50, 50);
+  // ellipse(birdsX, birdsY, 50, 50);
 
 
   text(score, 50, 50);
-
+textSize(40);
   birdsY+=birdYVelocity;
 
   birdYVelocity+=gravity;
@@ -59,25 +58,29 @@ PImage bird;
   pipeX-=5;
 
   fill(3, 255, 3);
-//  rect(pipeX, 0, 60, upperPipeHeight);
+  //  rect(pipeX, 0, 60, upperPipeHeight);
 
-//  rect(pipeX, lowerY, 60, lowerPipeHeight);
+  //  rect(pipeX, lowerY, 60, lowerPipeHeight);
 
   //ground
   rect(0, HEIGHT-40, WIDTH, 40);
 
   teleportPipes();
-
-
-  if (birdsY>HEIGHT-40) {
-    stop();
-  }
-
   boolean end = intersectsPipes() ;
-  if (end==true) {
+
+  if (birdsY>HEIGHT-40 || end==true ) {
+    background(118, 115, 115);
+
+    fill(219, 22, 22);
+    textSize(40);
+    text("GAME OVER", 280, 300);
+
+textSize(40);
+text(score,380, 370);
     stop();
   }
 }
+
 
 
 
@@ -87,7 +90,7 @@ PImage bird;
 
 
 public void mousePressed() {
-  birdYVelocity = -10;
+  birdYVelocity = -9;
 }
 
 public void teleportPipes() {
@@ -97,8 +100,8 @@ public void teleportPipes() {
     score=score+1;
     lowerY = upperPipeHeight + pipeGap;
     lowerPipeHeight=HEIGHT-(upperPipeHeight+pipeGap);
-      pipeBottom.resize(60,lowerPipeHeight );
-  pipeTop.resize(60, upperPipeHeight);
+    pipeBottom.resize(60, lowerPipeHeight );
+    pipeTop.resize(60, upperPipeHeight);
   }
 }
 
