@@ -14,35 +14,37 @@ import org.jointheleague.graphical.robot.Robot;
 public class FinishLine {
 	static Robot rob = new Robot("mini");
 	static int totalDistance;
-	
+
 	public static void main(String[] args) {
 		//1. Call the drawFinishLine() method
-		 drawFinishLine(); 
-		 
+		drawFinishLine(); 
+
 		//2. Call the crazyMove() method to move the robot
-	crazyMove();
-		 
+		crazyMove();
+
 		//3. Call the getTotalDistance() and save what is returned into a variable
-	int distance =getTotalDistance(); 
-		 
+		int distance =getTotalDistance(); 
+
 		//4. Call the hasCrossedFinishLine() method and save what is returned into a variable
-boolean finishLine =hasCrossedFinishLine();
-		 
+		boolean finishLine =hasCrossedFinishLine();
+
 		//5. If the robot has crossed the finish line... 
-			if (finishLine) {
-			JOptionPane.showMessageDialog(null, end);
-			}
-			//6. Use a pop up to say the robot finished and how far it went
-		
-		
+		if (finishLine) {
+			JOptionPane.showMessageDialog(null, "The robot finished and it went "+ distance +" pixels");
+		} else {
+			JOptionPane.showMessageDialog(null, "The robot did not finished and it went "+ distance +" pixels");
+		}
+		//6. Use a pop up to say the robot finished and how far it went
+
+
 		//7. Else use a pop up to say the robot did not finish and how far it went
-		
+
 	}
-	
+
 	static void crazyMove() {
 		rob.setX(400);
 		rob.setY(600);
-		
+
 		int numMoves = new Random().nextInt(41)+10;
 		for (int i = 0; i < numMoves; i++ ) { 
 			rob.setAngle(0);
@@ -57,11 +59,11 @@ boolean finishLine =hasCrossedFinishLine();
 			totalDistance+=dist;
 		}
 	}
-	
+
 	static void drawFinishLine() {
 		rob.setSpeed(100);
 		rob.penDown();
-		
+
 		//Lines
 		rob.setX(0);
 		rob.setY(200);
@@ -70,7 +72,7 @@ boolean finishLine =hasCrossedFinishLine();
 		rob.setY(250);
 		rob.turn(180);
 		rob.move(1000);
-		
+
 		//F
 		rob.setX(300);
 		rob.setY(210);
@@ -86,7 +88,7 @@ boolean finishLine =hasCrossedFinishLine();
 		rob.move(15);
 		rob.turn(-90);
 		rob.move(15);
-		
+
 		//I
 		rob.setX(330);
 		rob.setY(210);
@@ -100,7 +102,7 @@ boolean finishLine =hasCrossedFinishLine();
 		rob.move(10);
 		rob.turn(180);
 		rob.move(20);
-		
+
 		//N
 		rob.setX(360);
 		rob.setY(240);
@@ -110,7 +112,7 @@ boolean finishLine =hasCrossedFinishLine();
 		rob.move(40);
 		rob.turn(-135);
 		rob.move(30);
-		
+
 		//I
 		rob.setX(400);
 		rob.setY(210);
@@ -124,7 +126,7 @@ boolean finishLine =hasCrossedFinishLine();
 		rob.move(10);
 		rob.turn(180);
 		rob.move(20);
-		
+
 		//S
 		rob.setX(430);
 		rob.turn(180);
@@ -137,7 +139,7 @@ boolean finishLine =hasCrossedFinishLine();
 		rob.move(15);
 		rob.turn(90);
 		rob.move(20);
-		
+
 		//H
 		rob.setX(460);
 		rob.setY(210);
@@ -152,16 +154,16 @@ boolean finishLine =hasCrossedFinishLine();
 		rob.turn(180);
 		rob.move(30);
 	}
-	
+
 	static int getTotalDistance() {
 		return totalDistance;
 	}
-	
+
 	static boolean hasCrossedFinishLine() {
 		if(rob.getY() < 200) {
 			return true;
 		}
 		return false;
 	}
-	
+
 }
