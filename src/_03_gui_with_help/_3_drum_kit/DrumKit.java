@@ -85,7 +85,7 @@ public class DrumKit implements MouseListener {
 	Point snarePoint = drumLabel.getLocation();
 	Point cymbalPoint = cymbalLabel.getLocation();
 	Rectangle snareRect = drumLabel.getBounds();
-	Rectangle snareTopRect = new Rectangle(snareRect.getX(), snareRect.getY(), snareRect.getWidth(), snareRect.getHeight() - 300);
+//	Rectangle snareTopRect = new Rectangle(snareRect.getX(), snareRect.getY(), snareRect.getWidth(), snareRect.getHeight() - 300);
 	
 	
 	// You can use the drum sound provided ("drum.wav") or
