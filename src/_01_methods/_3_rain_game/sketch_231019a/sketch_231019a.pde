@@ -46,6 +46,8 @@ int bucketHeight;
 PImage bucket;
 int y=0;
 int x=(int) random(width);
+PImage back;
+boolean InMenu= true;
 
 // Sets the size of your canvas
 
@@ -56,47 +58,85 @@ int x=(int) random(width);
 
 @Override
   public void setup() {
+
+  back = loadImage( "stars3.jpeg");
+  back.resize(600, 600);
 }
 
+void mousePressed() {
+
+  if (InMenu) {
+    if (mouseX>=250 && mouseY >=300 && mouseY <=340) {
+      InMenu= false;
+    }
+  }
+}
 @Override
   public void draw() {
+
+  if ( InMenu==true) {
+    background (0, 0, 0);
+    fill(255, 254, 250);
+    rect(250, 300, 100, 40);
+    fill(27, 8, 255);
+    text("play", 282, 325);
+    textSize(22);
+    text("Rain Game", 260, 180);
     
-if (score==20){
- text("Game won",247, 135, 210);
-}else if (score==-5){
-  text("Game Over",247, 135, 210);
-}
-else{
-
-    
-  background(0, 0, 0);
-  fill(247, 135, 210);
-  stroke(143, 213, 245);
-  ellipse(x, y, 8, 8);
-
-
-
-  if (y>HEIGHT)
-  {
+  } else {
 
 
 
 
-    if ( x>mouseX && x<mouseX+100) {
-      score++;
+
+
+
+
+
+
+    if (score==20) {
+      text("Game won", 247, 135, 210);
+    } else if (score==-5) {
+      text("Game Over", 247, 135, 210);
     } else {
-      score--;
+
+
+      background(back);
+      fill(225, 225, 225);
+      stroke(225, 225, 225);
+      ellipse(x, y, 8, 8);
+
+      fill (250, 10, 247);
+
+      if (y>HEIGHT)
+      {
+
+
+
+        if ( x>mouseX && x<mouseX+100) {
+          score++;
+        } else {
+          score--;
+        }
+
+        y=0;
+        x=(int) random(width);
+      }
+      y+=7;
+      if (score>6) {
+        fill(157, 30, 227);
+        y+=7.005;
+      }
+      if (score>12) {
+        fill(30, 74, 227);
+        y+=7.006;
+      }
+
+      rect (mouseX, HEIGHT-50, 100, 50);
+
+      fill(255, 255, 255);
+      textSize(30);
+      text("Score: " + score, 250, 100);
     }
-    
-    y=0;
-    x=(int) random(width);
   }
-  y+=15;
-
-  rect (mouseX, HEIGHT-50, 100, 50);
-
-  fill(255, 255, 255);
-  textSize(30);
-  text("Score: " + score, 250, 100);
 }
-  }
